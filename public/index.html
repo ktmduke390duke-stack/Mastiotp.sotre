@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OTP Dashboard</title>
+  <style>
+    body {
+      background: #0b1020;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .card {
+      background: #17213a;
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 12px;
+    }
+    button {
+      background: #637fff;
+      color: white;
+      border: 0;
+      padding: 12px 18px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>NumberHub</h1>
+  <p>Virtual SMS Dashboard</p>
+
+  <div class="card">
+    <h3>Wallet Balance</h3>
+    <h2>₹0.00</h2>
+  </div>
+
+  <div class="card">
+    <h3>OTP Services</h3>
+    <p>Demo Dashboard</p>
+    <button onclick="checkStatus()">
+      Check Server
+    </button>
+    <p id="result">Server পরীক্ষা করা হয়নি</p>
+  </div>
+
+  <script>
+    async function checkStatus() {
+      const result = document.getElementById("result");
+      try {
+        const response = await fetch("/api/status");
+        const data = await response.json();
+        result.textContent = data.message;
+      } catch (error) {
+        result.textContent = "Server connection failed";
+      }
+    }
+  </script>
+</body>
+</html>
